@@ -22,7 +22,7 @@ def UI_generation():
         image = Image.open(uploaded_file)
         st.image(image, caption='test')
 
-    radio_option = st.radio('Select the model', ('SwinIR', 'SwinIR-L'),horizontal=True)
+    radio_option = st.radio('Select the model', ('SwinIR'),horizontal=True)
     if radio_option == 'SwinIR':
         large_model = False
     else:
@@ -44,12 +44,12 @@ def UI_generation():
 
         with st.spinner('Wait for it...'):
             if large_model:
-                model_path='experiments/pretrained_models/003_realSR_BSRGAN_DFOWMFC_s64w8_SwinIR-L_x4_GAN.pth'
+                model_path='experiments/003_realSR_BSRGAN_DFOWMFC_s64w8_SwinIR-L_x4_GAN.pth'
                 st.write("Upscaling using SwinIR-L")
                 main_test_swinir.main('real_sr',4,15,40,128,large_model,model_path,upload_folder,None,None,32)
 
             else:
-                model_path='experiments/pretrained_models/003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.pth'
+                model_path='experiments/003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.pth'
                 st.write("Upscaling using SwinIR")
                 main_test_swinir.main('real_sr',4,15,40,128,large_model,model_path,upload_folder,None,None,32)
                 
