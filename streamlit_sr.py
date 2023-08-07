@@ -20,13 +20,13 @@ def UI_generation():
     uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
-        st.image(image, caption='test')
+        st.image(image, caption='low resolution image')
 
-    radio_option = st.radio('Select the model', ('SwinIR'),horizontal=True)
+    radio_option = st.radio('Select the model', ('SwinIR',"SwinIR large"),horizontal=True)
     if radio_option == 'SwinIR':
         large_model = False
     else:
-        large_model = True  
+        large_model = False  
         
     upscale = st.button("Upscale", use_container_width=True,disabled=uploaded_file is None)
     if upscale:
@@ -44,7 +44,7 @@ def UI_generation():
 
         with st.spinner('Wait for it...'):
             if large_model:
-                model_path='experiments/003_realSR_BSRGAN_DFOWMFC_s64w8_SwinIR-L_x4_GAN.pth'
+                model_path='experiments/003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.pth'
                 st.write("Upscaling using SwinIR-L")
                 main_test_swinir.main('real_sr',4,15,40,128,large_model,model_path,upload_folder,None,None,32)
 
